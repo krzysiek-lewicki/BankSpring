@@ -1,6 +1,8 @@
 package pl.training.bank;
 
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import pl.training.bank.config.Beans;
 import pl.training.bank.entity.Account;
 import pl.training.bank.operation.DepositOperation;
 import pl.training.bank.operation.TransferOperation;
@@ -11,7 +13,7 @@ public class App {
 
     public static void main(String[] args) {
 
-        try (ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("beans.xml")) {
+        try (AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(Beans.class)) {
 
             AccountsService accountsService = applicationContext.getBean(AccountsService.class);
 
