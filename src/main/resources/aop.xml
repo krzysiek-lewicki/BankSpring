@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <aop:aspectj-autoproxy/>
+
+    <bean id="operationLogger" class="pl.training.bank.operation.ConsoleOperationLogger"/>
+
+    <aop:config>
+        <aop:aspect ref="operationLogger">
+            <aop:pointcut id="processOperation" expression="execution(void pl.training.bank.service.AccountsService.process(..)) and args(operation)"/>
+            <aop:before pointcut-ref="processOperation" method="beforeOperation"/>
+            <aop:after-returning pointcut-ref="processOperation" method="onSuccess"/>
+            <aop:after-throwing pointcut-ref="processOperation" method="onException" throwing="ex"/>
+        </aop:aspect>
+    </aop:config>
+
+</beans>
