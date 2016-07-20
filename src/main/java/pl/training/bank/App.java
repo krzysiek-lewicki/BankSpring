@@ -5,11 +5,7 @@ import pl.training.bank.entity.Account;
 import pl.training.bank.operation.DepositOperation;
 import pl.training.bank.operation.TransferOperation;
 import pl.training.bank.operation.WithdrawOperation;
-import pl.training.bank.service.AccountNumberGenerator;
 import pl.training.bank.service.AccountsService;
-import pl.training.bank.service.IncrementalAccountNumberGenerator;
-import pl.training.bank.service.repository.AccountsRepository;
-import pl.training.bank.service.repository.HashMapAccountsRepository;
 
 public class App {
 
