@@ -10,7 +10,6 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <spring.version>4.2.5.RELEASE</spring.version>
         <java.version>1.8</java.version>
     </properties>
 
