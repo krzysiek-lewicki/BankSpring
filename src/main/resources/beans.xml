@@ -4,10 +4,11 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <import resource="aop.xml"/>
+    <import resource="repository.xml"/>
 
-    <bean id="accountNumberGenerator" class="pl.training.bank.service.IncrementalAccountNumberGenerator"/>
-
-    <bean id="accountsRepository" class="pl.training.bank.service.repository.HashMapAccountsRepository"/>
+    <bean id="accountNumberGenerator" class="pl.training.bank.service.MySqlIncrementalAccountNumberGenerator">
+        <constructor-arg name="dataSource" ref="dataSource"/>
+    </bean>
 
     <bean id="accountsService" class="pl.training.bank.service.AccountsService" init-method="init" destroy-method="destroy">
         <constructor-arg name="accountNumberGenerator" ref="accountNumberGenerator"/>

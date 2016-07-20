@@ -11,4 +11,10 @@ public class IncrementalAccountNumberGenerator implements AccountNumberGenerator
         return String.format("%026d", counter.incrementAndGet());
     }
 
+    public final void setCounter(String value) {
+        if (value != null) {
+            counter = new AtomicLong(Long.parseLong(value));
+        }
+    }
+
 }
