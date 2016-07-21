@@ -7,19 +7,33 @@
 
     <context:property-placeholder location="jdbc.properties"/>
 
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="username" value="${database.username}"/>
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="user" value="${database.username}"/>
         <property name="password" value="${database.password}"/>
-        <property name="url" value="${database.url}"/>
-        <property name="driverClassName" value="${database.driver}"/>
+        <property name="jdbcUrl" value="${database.url}"/>
+        <property name="driverClass" value="${database.driver}"/>
+        <property name="minPoolSize" value="10"/>
+        <property name="maxPoolSize" value="20"/>
+        <property name="maxIdleTime" value="50000"/>
     </bean>
 
-    <bean id="accountsRepository" class="pl.training.bank.service.repository.MySqlAccountsRepository">
-        <constructor-arg name="dataSource" ref="dataSource"/>
-    </bean>
-
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan" value="pl.training.bank.entity"/>
+        <property name="hibernateProperties">
+            <value>
+                hibernate.hbm2ddl.auto=update
+                hibernate.dialect=org.hibernate.dialect.MySQLDialect
+            </value>
+        </property>
+    </bean>
+
+    <bean id="accountsRepository" class="pl.training.bank.service.repository.HibernateAccountsRepository">
+        <constructor-arg name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
     <tx:advice id="txAdvice">

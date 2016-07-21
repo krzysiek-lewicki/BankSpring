@@ -6,8 +6,8 @@
     <import resource="aop.xml"/>
     <import resource="repository.xml"/>
 
-    <bean id="accountNumberGenerator" class="pl.training.bank.service.MySqlIncrementalAccountNumberGenerator">
-        <constructor-arg name="dataSource" ref="dataSource"/>
+    <bean id="accountNumberGenerator" class="pl.training.bank.service.HibernateIncrementalAccountNumberGenerator">
+        <constructor-arg name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
     <bean id="accountsService" class="pl.training.bank.service.AccountsService" init-method="init" destroy-method="destroy">
