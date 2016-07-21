@@ -9,18 +9,18 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import pl.training.bank.service.repository.AccountsRepository;
-import pl.training.bank.service.repository.JpaAccountsRepository;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 import java.util.Properties;
 
+@EnableJpaRepositories(basePackages = "pl.training.bank.service.repository")
 @EnableTransactionManagement
 @PropertySource("classpath:jdbc.properties")
 @Configuration
@@ -58,11 +58,6 @@ public class Repository {
         entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
         entityManagerFactoryBean.setJpaProperties(jpaProperties);
         return entityManagerFactoryBean;
-    }
-
-    @Bean
-    public AccountsRepository accountsRepository() {
-        return new JpaAccountsRepository();
     }
 
     @Bean
