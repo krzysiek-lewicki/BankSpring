@@ -1,14 +1,21 @@
 package pl.training.bank.entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+@Table(name = "accounts")
+@Entity
 public class Account implements Serializable {
 
+    @GeneratedValue
+    @Id
     private Long id;
+    @Column(unique = true)
     private String number;
     private long balance;
+    @ManyToMany
     private List<Customer> customers = new ArrayList<>();
 
     public Account() {
