@@ -13,7 +13,7 @@ public class WithdrawOperation extends Operation {
         Account account = accountsRepository.getByNumber(sourceAccountNumber);
         throwExceptionWhenNoSufficientFunds(account, funds);
         account.withdraw(funds);
-        accountsRepository.update(account);
+        accountsRepository.save(account);
     }
 
     private void throwExceptionWhenNoSufficientFunds(Account account, long funds) {
