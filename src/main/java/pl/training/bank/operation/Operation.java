@@ -1,11 +1,9 @@
 package pl.training.bank.operation;
 
-import org.springframework.transaction.annotation.Transactional;
 import pl.training.bank.service.repository.AccountsRepository;
 
 import java.text.NumberFormat;
 
-@Transactional
 public abstract class Operation {
 
     protected AccountsRepository accountsRepository;

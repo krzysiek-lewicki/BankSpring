@@ -1,5 +1,6 @@
 package pl.training.bank.service;
 
+import org.springframework.transaction.annotation.Transactional;
 import pl.training.bank.entity.Account;
 import pl.training.bank.operation.Operation;
 import pl.training.bank.service.repository.AccountsRepository;
@@ -7,6 +8,7 @@ import pl.training.bank.service.repository.AccountsRepository;
 import java.util.ArrayList;
 import java.util.List;
 
+@Transactional
 public class AccountsService {
 
     private AccountsRepository accountsRepository;
