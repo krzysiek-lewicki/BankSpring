@@ -24,7 +24,7 @@ public class WithdrawOperation extends Operation {
 
     @Override
     public String toString() {
-        return String.format("%s <== %s", sourceAccountNumber, formatCurrency(funds));
+        return String.format("%s ==> %s", sourceAccountNumber, formatCurrency(funds));
     }
 
 }
