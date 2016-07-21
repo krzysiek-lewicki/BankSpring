@@ -12,7 +12,7 @@ public class DepositOperation extends Operation {
     public void execute() {
        Account account = accountsRepository.getByNumber(sourceAccountNumber);
        account.deposit(funds);
-       accountsRepository.update(account);
+       accountsRepository.save(account);
     }
 
     @Override
