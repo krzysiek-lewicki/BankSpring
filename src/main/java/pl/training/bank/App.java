@@ -10,7 +10,6 @@ import pl.training.bank.service.AccountsService;
 public class App {
 
     public static void main(String[] args) {
-
         try (ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("beans.xml")) {
 
             AccountsService accountsService = applicationContext.getBean(AccountsService.class);
