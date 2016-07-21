@@ -20,7 +20,7 @@ public class App {
             accountsService.process(new DepositOperation(firstAccount.getNumber(), 1000));
             accountsService.process(new DepositOperation(secondAccount.getNumber(), 500));
             accountsService.process(new WithdrawOperation(firstAccount.getNumber(), 200));
-            accountsService.process(new TransferOperation(firstAccount.getNumber(), "ss", 10));
+            accountsService.process(new TransferOperation(firstAccount.getNumber(), secondAccount.getNumber(), 10));
 
             System.out.println(firstAccount);
             System.out.println(secondAccount);
