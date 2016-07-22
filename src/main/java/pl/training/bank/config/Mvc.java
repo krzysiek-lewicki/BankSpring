@@ -14,7 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @ComponentScan(basePackages = "pl.training.bank.controller")
-@Import(Beans.class)
+@Import({Beans.class, Security.class})
 @EnableWebMvc
 @Configuration
 public class Mvc extends WebMvcConfigurerAdapter {
@@ -23,6 +23,7 @@ public class Mvc extends WebMvcConfigurerAdapter {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("index");
         registry.addViewController("index.html").setViewName("index");
+        registry.addViewController("login.html").setViewName("login");
     }
 
     @Override
