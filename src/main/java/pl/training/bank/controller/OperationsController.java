@@ -2,6 +2,7 @@ package pl.training.bank.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -9,6 +10,8 @@ import pl.training.bank.operation.Operation;
 import pl.training.bank.operation.OperationResolver;
 import pl.training.bank.service.AccountsService;
 import pl.training.bank.viewmodel.OperationModel;
+
+import javax.validation.Valid;
 
 @RequestMapping("operationForm.html")
 @Controller
@@ -31,7 +34,12 @@ public class OperationsController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ModelAndView processOperation(OperationModel operationModel) {
+    public ModelAndView processOperation(@Valid OperationModel operationModel, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ModelAndView("operationForm");
+        }
+
+
         Operation operation = operationResolver.get(operationModel.getName());
         operation.setSourceAccountNumber(operationModel.getSourceAccountNumber());
         operation.setFunds(operationModel.getFunds());

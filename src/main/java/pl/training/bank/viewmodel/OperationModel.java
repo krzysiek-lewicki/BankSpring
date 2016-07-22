@@ -1,13 +1,18 @@
 package pl.training.bank.viewmodel;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import pl.training.bank.validation.Funds;
 
-@XmlRootElement(name = "operation")
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 public class OperationModel {
 
     private String name;
+    @Pattern(regexp = "\\d{26}")
+    @NotNull
     private String sourceAccountNumber = "00000000000000000000000001";
     private String destinationAccountNumber;
+    @Funds(maxValue = 2000)
     private long funds;
 
     public String getName() {
