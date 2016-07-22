@@ -2,6 +2,8 @@ package pl.training.bank.config;
 
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.*;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import pl.training.bank.dto.DtoMapper;
 import pl.training.bank.operation.*;
 import pl.training.bank.service.AccountNumberGenerator;
 import pl.training.bank.service.AccountsService;
@@ -10,7 +12,7 @@ import pl.training.bank.service.repository.AccountsRepository;
 
 import javax.persistence.EntityManagerFactory;
 
-@Import(Repository.class)
+@EnableJpaRepositories(basePackages = "pl.training.bank.service.repository")
 @EnableAspectJAutoProxy
 @Configuration
 public class Beans {
@@ -52,6 +54,11 @@ public class Beans {
     @Bean
     public TransferOperation transferOperation() {
         return new TransferOperation();
+    }
+
+    @Bean
+    public DtoMapper dtoMapper() {
+        return new DtoMapper();
     }
 
 }
