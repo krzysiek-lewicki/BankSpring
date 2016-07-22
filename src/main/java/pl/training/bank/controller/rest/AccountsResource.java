@@ -2,10 +2,7 @@ package pl.training.bank.controller.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pl.training.bank.dto.AccountDto;
 import pl.training.bank.dto.AccountsListDto;
@@ -17,6 +14,7 @@ import pl.training.bank.service.repository.ResultPage;
 import java.net.URI;
 import java.util.List;
 
+@CrossOrigin
 @RequestMapping(value = "api/accounts", produces = {"application/json"})
 @RestController
 public class AccountsResource {

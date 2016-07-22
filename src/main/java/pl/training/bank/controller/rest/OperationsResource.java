@@ -13,6 +13,7 @@ import pl.training.bank.operation.OperationResolver;
 import pl.training.bank.service.AccountsService;
 import pl.training.bank.service.repository.AccountNotFoundException;
 
+@CrossOrigin
 @RequestMapping(value = "api/operations")
 @RestController
 public class OperationsResource {
