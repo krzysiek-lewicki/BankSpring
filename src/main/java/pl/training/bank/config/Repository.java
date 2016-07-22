@@ -1,15 +1,13 @@
 package pl.training.bank.config;
 
-import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.hibernate.jpa.HibernatePersistenceProvider;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -17,7 +15,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
-import java.beans.PropertyVetoException;
 import java.util.Properties;
 
 @EnableJpaRepositories(basePackages = "pl.training.bank.service.repository")
@@ -26,21 +23,9 @@ import java.util.Properties;
 @Configuration
 public class Repository {
 
-    @Autowired
-    private Environment environment;
-
     @Bean
-    public DataSource dataSource() throws PropertyVetoException {
-        ComboPooledDataSource dataSource = new ComboPooledDataSource();
-        dataSource.setUser(environment.getProperty("database.username"));
-        dataSource.setPassword(environment.getProperty("database.password"));
-        dataSource.setJdbcUrl(environment.getProperty("database.url"));
-        dataSource.setDriverClass(environment.getProperty("database.driver"));
-
-        dataSource.setMinPoolSize(10);
-        dataSource.setMaxPoolSize(20);
-        dataSource.setMaxIdleTime(50000);
-        return dataSource;
+    public DataSource dataSource() {
+        return new JndiDataSourceLookup().getDataSource("java:comp/env/jdbc/bank");
     }
 
     @Bean
