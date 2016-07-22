@@ -4,6 +4,9 @@ import pl.training.bank.entity.Account;
 
 public class DepositOperation extends Operation {
 
+    public DepositOperation() {
+    }
+
     public DepositOperation(String sourceAccountNumber, long funds) {
         super(sourceAccountNumber, funds);
     }
