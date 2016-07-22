@@ -1,10 +1,8 @@
 package pl.training.bank.config;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.context.annotation.Import;
-import pl.training.bank.operation.ConsoleOperationLogger;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.*;
+import pl.training.bank.operation.*;
 import pl.training.bank.service.AccountNumberGenerator;
 import pl.training.bank.service.AccountsService;
 import pl.training.bank.service.JpaIncrementalAccountNumberGenerator;
@@ -31,6 +29,29 @@ public class Beans {
     @Bean
     public ConsoleOperationLogger operationLogger() {
         return new ConsoleOperationLogger();
+    }
+
+    @Bean
+    public OperationResolver operationResolver() {
+        return new OperationResolver();
+    }
+
+    @Scope(BeanDefinition.SCOPE_PROTOTYPE)
+    @Bean
+    public DepositOperation depositOperation() {
+        return new DepositOperation();
+    }
+
+    @Scope(BeanDefinition.SCOPE_PROTOTYPE)
+    @Bean
+    public WithdrawOperation withdrawOperation() {
+        return new WithdrawOperation();
+    }
+
+    @Scope(BeanDefinition.SCOPE_PROTOTYPE)
+    @Bean
+    public TransferOperation transferOperation() {
+        return new TransferOperation();
     }
 
 }

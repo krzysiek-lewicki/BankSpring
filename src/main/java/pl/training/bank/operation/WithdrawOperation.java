@@ -4,6 +4,9 @@ import pl.training.bank.entity.Account;
 
 public class WithdrawOperation extends Operation {
 
+    public WithdrawOperation() {
+    }
+
     public WithdrawOperation(String sourceAccountNumber, long funds) {
         super(sourceAccountNumber, funds);
     }
