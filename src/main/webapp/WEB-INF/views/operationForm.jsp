@@ -24,7 +24,7 @@
                     </c:when>
                 </c:choose>
             </p>
-            <sf:form action="operationForm.html" method="post" modelAttribute="operationDto">
+            <sf:form action="operationForm.html" method="post" modelAttribute="operationModel">
                 <div class="form-group">
                     <s:message code="selectAccount.accountLabel"/>
                     <sf:input path="sourceAccountNumber" type="text" name="accountNumber" class="form-control"/>

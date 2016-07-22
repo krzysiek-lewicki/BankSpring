@@ -30,6 +30,10 @@ public class AccountsService {
         operation.execute();
     }
 
+    public Account getAccountByNumber(String accountNumber) {
+        return accountsRepository.getByNumber(accountNumber);
+    }
+
     public List<Account> getAccounts(int pageNumber, int pageSize) {
         return new ArrayList<>();
     }
