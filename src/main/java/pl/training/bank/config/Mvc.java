@@ -21,7 +21,7 @@ import pl.training.bank.dto.DtoMapper;
 import java.util.List;
 
 @ComponentScan("pl.training.bank.controller")
-@Import(Beans.class)
+@Import({Beans.class, Security.class, OAuth2.ResourceServer.class, OAuth2.AuthorizationServer.class})
 @EnableWebMvc
 @Configuration
 public class Mvc extends WebMvcConfigurerAdapter {
