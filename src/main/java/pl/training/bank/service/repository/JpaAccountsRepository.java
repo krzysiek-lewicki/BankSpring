@@ -3,6 +3,7 @@ package pl.training.bank.service.repository;
 import pl.training.bank.entity.Account;
 
 import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
@@ -35,8 +36,10 @@ public class JpaAccountsRepository implements AccountsRepository {
 
     @Override
     public void update(Account account) {
+        entityManager.lock(account, LockModeType.PESSIMISTIC_WRITE);
         getByNumber(account.getNumber());
         entityManager.merge(account);
+        entityManager.lock(account, LockModeType.NONE);
     }
 
     public void setEntityManager(EntityManager entityManager) {

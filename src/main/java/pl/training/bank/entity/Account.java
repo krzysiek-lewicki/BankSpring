@@ -17,6 +17,8 @@ public class Account implements Serializable {
     private long balance;
     @ManyToMany
     private List<Customer> customers = new ArrayList<>();
+    //@Version
+    //private long version;
 
     public Account() {
     }
